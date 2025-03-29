@@ -2,13 +2,13 @@
 This is a digital version of the classic Ludo board game, built using HTML, CSS, and JavaScript. The game supports 2-4 players, with a turn-based dice rolling system and piece movement mechanics.
 
 🚀 Features
-✅ Turn-based gameplay (2-4 players)
-✅ Dice rolling mechanic
-✅ Piece movement along paths
-✅ Capturing opponent pieces
-✅ Win condition tracking
-✅ Simple UI with animations
-✅ (Optional) AI opponent & multiplayer mode
+1. Turn-based gameplay (2-4 players)
+2. Dice rolling mechanic
+3. Piece movement along paths
+4. Capturing opponent pieces
+5. Win condition tracking
+6. Simple UI with animations
+7. (Optional) AI opponent & multiplayer mode
 
 🛠️ Tech Stack
 HTML → Game board layout
