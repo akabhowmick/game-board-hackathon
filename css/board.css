@@ -69,3 +69,28 @@
   border-right: 63px solid #ffcc00;
   border-bottom: 63px solid #66ccff;
 }
+
+.dice-container {
+  text-align: center;
+  margin: 20px;
+}
+
+#rollDice {
+  font-size: 18px;
+  padding: 10px 20px;
+  background-color: #ffcc00;
+  border: none;
+  cursor: pointer;
+}
+
+#diceResult {
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+.piece {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  position: absolute;
+}
