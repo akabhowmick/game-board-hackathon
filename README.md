@@ -24,16 +24,16 @@ cd ludo-game
 Open index.html in your browser to start playing!
 
 🎮 How to Play
-Each player starts with 4 pieces in their home zone.
-Players take turns rolling a 6-sided dice.
-To move a piece out of the home zone, a player must roll a 6.
-Move pieces along the Ludo path towards the finish zone.
-Capturing: Landing on an opponent’s piece sends it back to their home zone.
-The first player to get all 4 pieces to the final zone wins!
+1. Each player starts with 4 pieces in their home zone.
+2. Players take turns rolling a 6-sided dice.
+3. To move a piece out of the home zone, a player must roll a 6.
+4. Move pieces along the Ludo path towards the finish zone.
+5. Capturing: Landing on an opponent’s piece sends it back to their home zone.
+6. The first player to get all 4 pieces to the final zone wins!
 
 🎨 Customization
-Modify style.css to change colors, board design, and animations.
-Edit game.js to add new rules, AI players, or online multiplayer.
+- Modify style.css to change colors, board design, and animations.
+- Edit game.js to add new rules, AI players, or online multiplayer.
 
 🐞 Known Issues & Future Enhancements
 [ ] AI Opponent (Basic logic for single-player mode)
