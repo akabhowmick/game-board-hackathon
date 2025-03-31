@@ -1,3 +1,20 @@
+html {
+  background-color: #000;
+}
+
+.board {
+  width: fit-content;
+  border: 10px solid #11262e;
+  border-radius: 5px;
+  margin: 10px auto;
+  background-color: white;
+  
+}
+
+.cell{
+  background-color: #fff;
+}
+
 .green {
   background-color: #009900;
 }
@@ -13,12 +30,9 @@
 .row {
   display: flex;
 }
-.board {
-  width: fit-content;
-  border: 10px solid #11262e;
-  border-radius: 5px;
-  margin: 10px auto;
-}
+
+
+
 .white-box {
   background-color: white;
   width: 150px;
@@ -72,7 +86,10 @@
 
 .dice-container {
   text-align: center;
-  margin: 20px;
+  margin: 0 auto;
+  padding: 20px;
+  width: 50%;
+  background-color: white;
 }
 
 #rollDice {
