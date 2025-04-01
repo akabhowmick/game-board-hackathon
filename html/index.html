@@ -3,177 +3,158 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Ludo Board</title>
-    <link rel="stylesheet" href="../css/board.css" />
+    <title>Ludo</title>
+    <link rel="stylesheet" href="../css/board.css">
   </head>
   <body>
-    <div class="board">
-      <div class="row">
-        <div class="red-box">
-          <div class="white-box">
-            <div class="red circle"></div>
-            <div class="red circle"></div>
-            <div class="red circle"></div>
-            <div class="red circle"></div>
+    <div class="outer">
+      <div class="box_row">
+        <div class="box" style="border: 50px solid red">
+          <div class="circle border_red"></div>
+          <div class="circle border_red"></div>
+          <div class="circle border_red"></div>
+          <div class="circle border_red"></div>
+        </div>
+        <div class="v_lad">
+          <div class="v_lad_row">
+            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell"></div>
+          </div>
+          <div class="v_lad_row">
+            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell green"></div>
+            <div class="v_lad_cell green"><span class="star">&#9733;</span></div>
+          </div>
+          <div class="v_lad_row">
+            <div class="v_lad_cell green"><span class="star">&#9733;</span></div>
+            <div class="v_lad_cell green"></div>
+            <div class="v_lad_cell"></div>
+          </div>
+          <div class="v_lad_row">
+            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell green"></div>
+            <div class="v_lad_cell"></div>
+          </div>
+          <div class="v_lad_row">
+            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell green"></div>
+            <div class="v_lad_cell"></div>
+          </div>
+          <div class="v_lad_row">
+            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell green"></div>
+            <div class="v_lad_cell"></div>
           </div>
         </div>
-        <div class="cell-container">
-          <div class="row">
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
+        <div class="box" style="border: 50px solid green">
+          <div class="circle border_green"></div>
+          <div class="circle border_green"></div>
+          <div class="circle border_green"></div>
+          <div class="circle border_green"></div>
+        </div>
+      </div>
+      <div class="middle_row">
+        <div class="h_lad">
+          <div class="h_lad_row">
+            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell red"><span class="star">&#9733;</span></div>
+            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell"></div>
           </div>
-          <div class="row">
-            <div class="cell"></div>
-            <div class="cell green"></div>
-            <div class="cell green"></div>
+          <div class="h_lad_row">
+            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell red"></div>
+            <div class="h_lad_cell red"></div>
+            <div class="h_lad_cell red"></div>
+            <div class="h_lad_cell red"></div>
+            <div class="h_lad_cell red"></div>
           </div>
-          <div class="row">
-            <div class="cell"></div>
-            <div class="cell green"></div>
-            <div class="cell"></div>
-          </div>
-          <div class="row">
-            <div class="cell"></div>
-            <div class="cell green"></div>
-            <div class="cell"></div>
-          </div>
-          <div class="row">
-            <div class="cell"></div>
-            <div class="cell green"></div>
-            <div class="cell"></div>
-          </div>
-          <div class="row">
-            <div class="cell"></div>
-            <div class="cell green"></div>
-            <div class="cell"></div>
+          <div class="h_lad_row">
+            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell red"><span class="star">&#9733;</span></div>
+            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell"></div>
           </div>
         </div>
-        <div class="green-box">
-          <div class="white-box">
-            <div class="green circle"></div>
-            <div class="green circle"></div>
-            <div class="green circle"></div>
-            <div class="green circle"></div>
+        <div class="ludo_home"></div>
+        <div class="h_lad">
+          <div class="h_lad_row">
+            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell yellow"><span class="star">&#9733;</span></div>
+            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell"></div>
+          </div>
+          <div class="h_lad_row">
+            <div class="h_lad_cell yellow"></div>
+            <div class="h_lad_cell yellow"></div>
+            <div class="h_lad_cell yellow"></div>
+            <div class="h_lad_cell yellow"></div>
+            <div class="h_lad_cell yellow"></div>
+            <div class="h_lad_cell"></div>
+          </div>
+          <div class="h_lad_row">
+            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell yellow"><span class="star">&#9733;</span></div>
+            <div class="h_lad_cell"></div>
           </div>
         </div>
       </div>
-      <div class="row">
-        <div class="cell-container">
-          <div class="row">
-            <div class="cell"></div>
-            <div class="cell red"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
+      <div class="box_row">
+        <div class="box" style="border: 50px solid blue">
+          <div class="circle border_blue"></div>
+          <div class="circle border_blue"></div>
+          <div class="circle border_blue"></div>
+          <div class="circle border_blue"></div>
+        </div>
+        <div class="v_lad">
+          <div class="v_lad_row">
+            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell blue"></div>
+            <div class="v_lad_cell"></div>
           </div>
-          <div class="row">
-            <div class="cell"></div>
-            <div class="cell red"></div>
-            <div class="cell red"></div>
-            <div class="cell red"></div>
-            <div class="cell red"></div>
-            <div class="cell red"></div>
+          <div class="v_lad_row">
+            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell blue"></div>
+            <div class="v_lad_cell"></div>
           </div>
-          <div class="row">
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
+          <div class="v_lad_row">
+            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell blue"></div>
+            <div class="v_lad_cell"></div>
+          </div>
+          <div class="v_lad_row">
+            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell blue"></div>
+            <div class="v_lad_cell blue"><span class="star">&#9733;</span></div>
+          </div>
+          <div class="v_lad_row">
+            <div class="v_lad_cell blue"><span class="star">&#9733;</span></div>
+            <div class="v_lad_cell blue"></div>
+            <div class="v_lad_cell"></div>
+          </div>
+          <div class="v_lad_row">
+            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell"></div>
           </div>
         </div>
-        <div class="destination"></div>
-        <div class="cell-container">
-          <div class="row">
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-          </div>
-          <div class="row">
-            <div class="cell yellow"></div>
-            <div class="cell yellow"></div>
-            <div class="cell yellow"></div>
-            <div class="cell yellow"></div>
-            <div class="cell yellow"></div>
-            <div class="cell"></div>
-          </div>
-          <div class="row">
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell yellow"></div>
-            <div class="cell"></div>
-          </div>
-        </div>
-      </div>
-      <div class="row">
-        <div class="blue-box">
-          <div class="white-box">
-            <div class="blue circle"></div>
-            <div class="blue circle"></div>
-            <div class="blue circle"></div>
-            <div class="blue circle"></div>
-          </div>
-        </div>
-        <div class="cell-container">
-          <div class="row">
-            <div class="cell"></div>
-            <div class="cell blue"></div>
-            <div class="cell"></div>
-          </div>
-          <div class="row">
-            <div class="cell"></div>
-            <div class="cell blue"></div>
-            <div class="cell"></div>
-          </div>
-          <div class="row">
-            <div class="cell"></div>
-            <div class="cell blue"></div>
-            <div class="cell"></div>
-          </div>
-          <div class="row">
-            <div class="cell"></div>
-            <div class="cell blue"></div>
-            <div class="cell"></div>
-          </div>
-          <div class="row">
-            <div class="cell blue"></div>
-            <div class="cell blue"></div>
-            <div class="cell"></div>
-          </div>
-          <div class="row">
-            <div class="cell"></div>
-            <div class="cell"></div>
-            <div class="cell"></div>
-          </div>
-        </div>
-        <div class="yellow-box">
-          <div class="white-box">
-            <div class="yellow circle"></div>
-            <div class="yellow circle"></div>
-            <div class="yellow circle"></div>
-            <div class="yellow circle"></div>
-          </div>
+        <div class="box" style="border: 50px solid yellow">
+          <div class="circle border_yellow"></div>
+          <div class="circle border_yellow"></div>
+          <div class="circle border_yellow"></div>
+          <div class="circle border_yellow"></div>
         </div>
       </div>
     </div>
-    <div class="dice-container">
-      <button id="rollDice">Click to Roll Dice</button>
-      <div id="diceResult">🎲</div>
-    </div>
-    <div id="pieces">
-      <div class="piece red-piece" id="red1" data-color="red"></div>
-      <div class="piece blue-piece" id="blue1" data-color="blue"></div>
-      <div class="piece yellow-piece" id="yellow1" data-color="yellow"></div>
-      <div class="piece green-piece" id="green1" data-color="green"></div>
-    </div>
-    <script src="../js/game.js"></script>
   </body>
 </html>

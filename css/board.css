@@ -1,113 +1,103 @@
-html {
-  background-color: #000;
+* {
+  margin: 0;
+  padding: 0;
 }
-
-.board {
-  width: fit-content;
-  border: 10px solid #11262e;
-  border-radius: 5px;
-  margin: 10px auto;
-  background-color: white;
-  
+.outer {
+  height: 750px;
+  width: 750px;
+  margin: 0px auto;
+  border: 1px solid red;
 }
-
-.cell{
-  background-color: #fff;
+.box_row {
+  height: 300px;
+  width: 750px;
 }
-
-.green {
-  background-color: #009900;
+.box {
+  height: 200px;
+  width: 200px;
+  float: left;
+}
+.v_lad {
+  height: 300px;
+  width: 150px;
+  float: left;
+}
+.circle {
+  height: 50px;
+  width: 50px;
+  margin: 25px;
+  border-radius: 50%;
+  box-sizing: border-box;
+  float: left;
+}
+.border_red {
+  border: 5px solid red;
+}
+.border_green {
+  border: 5px solid green;
+}
+.border_blue {
+  border: 5px solid blue;
+}
+.border_yellow {
+  border: 5px solid yellow;
+}
+.v_lad_row {
+  height: 50px;
+  width: 150px;
+}
+.v_lad_cell {
+  height: 50px;
+  width: 50px;
+  border: 1px solid #000;
+  box-sizing: border-box;
+  float: left;
+  text-align: center;
 }
 .red {
-  background-color: #ff0000;
+  background: red;
+}
+.green {
+  background: green;
 }
 .blue {
-  background-color: #66ccff;
+  background: blue;
 }
 .yellow {
-  background-color: #ffcc00;
+  background: yellow;
 }
-.row {
-  display: flex;
-}
-
-
-
-.white-box {
-  background-color: white;
-  width: 150px;
+.middle_row {
   height: 150px;
-  margin: 20% auto;
-  border: 1px solid black;
+  width: 750px;
 }
-.red-box {
-  background-color: #ff0000;
-  width: 250px;
-  height: 250px;
-  border: 1px solid black;
-}
-.green-box {
-  background-color: #009900;
-  width: 250px;
-  height: 250px;
-  border: 1px solid black;
-}
-.blue-box {
-  background-color: #66ccff;
-  width: 250px;
-  height: 250px;
-  border: 1px solid black;
-}
-.yellow-box {
-  background-color: #ffcc00;
-  width: 250px;
-  height: 250px;
-  border: 1px solid #000;
-}
-.white-box .circle {
-  border-radius: 50%;
-  width: 40px;
-  height: 40px;
+.h_lad {
+  height: 150px;
+  width: 300px;
   float: left;
-  margin: 16px;
-  border: 1px solid black;
 }
-.cell {
-  width: 40px;
-  height: 40px;
+.h_lad_row {
+  height: 50px;
+  width: 300px;
+  float: left;
+}
+.h_lad_cell {
+  height: 50px;
+  width: 50px;
   border: 1px solid #000;
-}
-.destination {
-  border-top: 63px solid #009900;
-  border-left: 63px solid #ff0000;
-  border-right: 63px solid #ffcc00;
-  border-bottom: 63px solid #66ccff;
-}
-
-.dice-container {
+  float: left;
+  box-sizing: border-box;
   text-align: center;
-  margin: 0 auto;
-  padding: 20px;
-  width: 50%;
-  background-color: white;
 }
-
-#rollDice {
-  font-size: 18px;
-  padding: 10px 20px;
-  background-color: #ffcc00;
-  border: none;
-  cursor: pointer;
+.ludo_home {
+  height: 0;
+  width: 0;
+  border-left: 75px solid red;
+  border-right: 75px solid yellow;
+  border-top: 75px solid green;
+  border-bottom: 75px solid blue;
+  float: left;
 }
-
-#diceResult {
-  font-size: 30px;
-  margin-top: 10px;
-}
-
-.piece {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  position: absolute;
+.star {
+  font-size: 32px;
+  text-align: center;
 }
