@@ -7,154 +7,160 @@
     <link rel="stylesheet" href="../css/board.css">
   </head>
   <body>
+    <div class="game-info">
+      <h2>Current Turn: <span id="currentTurn">Red</span></h2>
+      <button id="rollDice">Roll Dice</button>
+      <p>Dice Roll: <span id="diceResult">🎲</span></p>
+    </div>
     <div class="outer">
       <div class="box_row">
         <div class="box" style="border: 50px solid red">
-          <div class="circle border_red"></div>
-          <div class="circle border_red"></div>
-          <div class="circle border_red"></div>
-          <div class="circle border_red"></div>
+          <div class="circle border_red"><div class="token red"></div><div class="token red"></div></div>
+          <div class="circle border_red"><div class="token red"></div><div class="token red"></div></div>
+          <div class="circle border_red"><div class="token red"></div><div class="token red"></div></div>
+          <div class="circle border_red"><div class="token red"></div><div class="token red"></div></div>
         </div>
         <div class="v_lad">
           <div class="v_lad_row">
-            <div class="v_lad_cell"></div>
-            <div class="v_lad_cell"></div>
-            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell" id="10"></div>
+            <div class="v_lad_cell" id="11"></div>
+            <div class="v_lad_cell" id="12"></div>
           </div>
           <div class="v_lad_row">
-            <div class="v_lad_cell"></div>
-            <div class="v_lad_cell green"></div>
-            <div class="v_lad_cell green"><span class="star">&#9733;</span></div>
+            <div class="v_lad_cell" id="9"></div>
+            <div class="v_lad_cell green" id="GH1"></div>
+            <div class="v_lad_cell green" id="13"><span class="star">&#9733;</span></div>
           </div>
           <div class="v_lad_row">
-            <div class="v_lad_cell green"><span class="star">&#9733;</span></div>
-            <div class="v_lad_cell green"></div>
-            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell green" id="8"><span class="star">&#9733;</span></div>
+            <div class="v_lad_cell green" id="GH2"></div>
+            <div class="v_lad_cell" id="14"></div>
           </div>
           <div class="v_lad_row">
-            <div class="v_lad_cell"></div>
-            <div class="v_lad_cell green"></div>
-            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell" id="7"></div>
+            <div class="v_lad_cell green" id="GH3"></div>
+            <div class="v_lad_cell" id="15"></div>
           </div>
           <div class="v_lad_row">
-            <div class="v_lad_cell"></div>
-            <div class="v_lad_cell green"></div>
-            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell" id="6"></div>
+            <div class="v_lad_cell green" id="GH4"></div>
+            <div class="v_lad_cell" id="16"></div>
           </div>
           <div class="v_lad_row">
-            <div class="v_lad_cell"></div>
-            <div class="v_lad_cell green"></div>
-            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell" id="5"></div>
+            <div class="v_lad_cell green" id="GH5"></div>
+            <div class="v_lad_cell" id="17"></div>
           </div>
         </div>
         <div class="box" style="border: 50px solid green">
-          <div class="circle border_green"></div>
-          <div class="circle border_green"></div>
-          <div class="circle border_green"></div>
-          <div class="circle border_green"></div>
+          <div class="circle border_green"><div class="token green"></div></div>
+          <div class="circle border_green"><div class="token green"></div></div>
+          <div class="circle border_green"><div class="token green"></div></div>
+          <div class="circle border_green"><div class="token green"></div></div>
         </div>
       </div>
       <div class="middle_row">
         <div class="h_lad">
           <div class="h_lad_row">
-            <div class="h_lad_cell"></div>
-            <div class="h_lad_cell red"><span class="star">&#9733;</span></div>
-            <div class="h_lad_cell"></div>
-            <div class="h_lad_cell"></div>
-            <div class="h_lad_cell"></div>
-            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell" id="51"></div>
+            <div class="h_lad_cell red" id="0"><span class="star">&#9733;</span></div>
+            <div class="h_lad_cell" id="1"></div>
+            <div class="h_lad_cell" id="2"></div>
+            <div class="h_lad_cell" id="3"></div>
+            <div class="h_lad_cell" id="4"></div>
           </div>
           <div class="h_lad_row">
-            <div class="h_lad_cell"></div>
-            <div class="h_lad_cell red"></div>
-            <div class="h_lad_cell red"></div>
-            <div class="h_lad_cell red"></div>
-            <div class="h_lad_cell red"></div>
-            <div class="h_lad_cell red"></div>
+            <div class="h_lad_cell" id="50"></div>
+            <div class="h_lad_cell red" id="RH1"></div>
+            <div class="h_lad_cell red" id="RH2"></div>
+            <div class="h_lad_cell red" id="RH3"></div>
+            <div class="h_lad_cell red" id="RH4"></div>
+            <div class="h_lad_cell red" id="RH5"></div>
           </div>
           <div class="h_lad_row">
-            <div class="h_lad_cell"></div>
-            <div class="h_lad_cell"></div>
-            <div class="h_lad_cell red"><span class="star">&#9733;</span></div>
-            <div class="h_lad_cell"></div>
-            <div class="h_lad_cell"></div>
-            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell" id="49"></div>
+            <div class="h_lad_cell" id="48"></div>
+            <div class="h_lad_cell red" id="47"><span class="star">&#9733;</span></div>
+            <div class="h_lad_cell" id="46"></div>
+            <div class="h_lad_cell" id="45"></div>
+            <div class="h_lad_cell" id="44"></div>
           </div>
         </div>
         <div class="ludo_home"></div>
         <div class="h_lad">
           <div class="h_lad_row">
-            <div class="h_lad_cell"></div>
-            <div class="h_lad_cell"></div>
-            <div class="h_lad_cell"></div>
-            <div class="h_lad_cell yellow"><span class="star">&#9733;</span></div>
-            <div class="h_lad_cell"></div>
-            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell" id="18"></div>
+            <div class="h_lad_cell" id="19"></div>
+            <div class="h_lad_cell" id="20"></div>
+            <div class="h_lad_cell yellow" id="21"><span class="star">&#9733;</span></div>
+            <div class="h_lad_cell" id="22"></div>
+            <div class="h_lad_cell" id="23"></div>
           </div>
           <div class="h_lad_row">
-            <div class="h_lad_cell yellow"></div>
-            <div class="h_lad_cell yellow"></div>
-            <div class="h_lad_cell yellow"></div>
-            <div class="h_lad_cell yellow"></div>
-            <div class="h_lad_cell yellow"></div>
-            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell yellow" id="YH5"></div>
+            <div class="h_lad_cell yellow" id="YH4"></div>
+            <div class="h_lad_cell yellow" id="YH3"></div>
+            <div class="h_lad_cell yellow" id="YH2"></div>
+            <div class="h_lad_cell yellow" id="YH1"></div>
+            <div class="h_lad_cell" id="24"></div>
           </div>
           <div class="h_lad_row">
-            <div class="h_lad_cell"></div>
-            <div class="h_lad_cell"></div>
-            <div class="h_lad_cell"></div>
-            <div class="h_lad_cell"></div>
-            <div class="h_lad_cell yellow"><span class="star">&#9733;</span></div>
-            <div class="h_lad_cell"></div>
+            <div class="h_lad_cell" id="30"></div>
+            <div class="h_lad_cell" id="29"></div>
+            <div class="h_lad_cell" id="28"></div>
+            <div class="h_lad_cell" id="27"></div>
+            <div class="h_lad_cell yellow" id="26"><span class="star">&#9733;</span></div>
+            <div class="h_lad_cell" id="25"></div>
           </div>
         </div>
       </div>
       <div class="box_row">
         <div class="box" style="border: 50px solid blue">
-          <div class="circle border_blue"></div>
-          <div class="circle border_blue"></div>
-          <div class="circle border_blue"></div>
-          <div class="circle border_blue"></div>
+          <div class="circle border_blue"><div class="token blue"></div></div>
+          <div class="circle border_blue"><div class="token blue"></div></div>
+          <div class="circle border_blue"><div class="token blue"></div></div>
+          <div class="circle border_blue"><div class="token blue"></div></div>
         </div>
         <div class="v_lad">
           <div class="v_lad_row">
-            <div class="v_lad_cell"></div>
-            <div class="v_lad_cell blue"></div>
-            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell" id="43"></div>
+            <div class="v_lad_cell blue" id="BH5"></div>
+            <div class="v_lad_cell" id="31"></div>
           </div>
           <div class="v_lad_row">
-            <div class="v_lad_cell"></div>
-            <div class="v_lad_cell blue"></div>
-            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell" id="42"></div>
+            <div class="v_lad_cell blue" id="BH4"></div>
+            <div class="v_lad_cell" id="32"></div>
           </div>
           <div class="v_lad_row">
-            <div class="v_lad_cell"></div>
-            <div class="v_lad_cell blue"></div>
-            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell" id="41"></div>
+            <div class="v_lad_cell blue" id="BH3"></div>
+            <div class="v_lad_cell" id="33"></div>
           </div>
           <div class="v_lad_row">
-            <div class="v_lad_cell"></div>
-            <div class="v_lad_cell blue"></div>
-            <div class="v_lad_cell blue"><span class="star">&#9733;</span></div>
+            <div class="v_lad_cell" id="40"></div>
+            <div class="v_lad_cell blue" id="BH2"></div>
+            <div class="v_lad_cell blue" id="34"><span class="star">&#9733;</span></div>
           </div>
           <div class="v_lad_row">
-            <div class="v_lad_cell blue"><span class="star">&#9733;</span></div>
-            <div class="v_lad_cell blue"></div>
-            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell blue" id="39"><span class="star">&#9733;</span></div>
+            <div class="v_lad_cell blue" id="BH1"></div>
+            <div class="v_lad_cell" id="35"></div>
           </div>
           <div class="v_lad_row">
-            <div class="v_lad_cell"></div>
-            <div class="v_lad_cell"></div>
-            <div class="v_lad_cell"></div>
+            <div class="v_lad_cell" id="36"></div>
+            <div class="v_lad_cell" id="37"></div>
+            <div class="v_lad_cell" id="38"></div>
           </div>
         </div>
         <div class="box" style="border: 50px solid yellow">
-          <div class="circle border_yellow"></div>
-          <div class="circle border_yellow"></div>
-          <div class="circle border_yellow"></div>
-          <div class="circle border_yellow"></div>
+          <div class="circle border_yellow"><div class="token yellow"></div></div>
+          <div class="circle border_yellow"><div class="token yellow"></div></div>
+          <div class="circle border_yellow"><div class="token yellow"></div></div>
+          <div class="circle border_yellow"><div class="token yellow"></div></div>
         </div>
       </div>
     </div>
   </body>
+  <script src="../js/game.js"></script>
 </html>

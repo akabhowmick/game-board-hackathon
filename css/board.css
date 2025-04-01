@@ -2,26 +2,32 @@
   margin: 0;
   padding: 0;
 }
+
 .outer {
   height: 750px;
   width: 750px;
   margin: 0px auto;
   border: 1px solid red;
 }
+
 .box_row {
   height: 300px;
   width: 750px;
 }
+
 .box {
   height: 200px;
   width: 200px;
   float: left;
+  position: relative;
 }
+
 .v_lad {
   height: 300px;
   width: 150px;
   float: left;
 }
+
 .circle {
   height: 50px;
   width: 50px;
@@ -29,23 +35,30 @@
   border-radius: 50%;
   box-sizing: border-box;
   float: left;
+  position: relative;
 }
+
 .border_red {
   border: 5px solid red;
 }
+
 .border_green {
   border: 5px solid green;
 }
+
 .border_blue {
   border: 5px solid blue;
 }
+
 .border_yellow {
   border: 5px solid yellow;
 }
+
 .v_lad_row {
   height: 50px;
   width: 150px;
 }
+
 .v_lad_cell {
   height: 50px;
   width: 50px;
@@ -54,32 +67,40 @@
   float: left;
   text-align: center;
 }
+
 .red {
   background: red;
 }
+
 .green {
   background: green;
 }
+
 .blue {
   background: blue;
 }
+
 .yellow {
   background: yellow;
 }
+
 .middle_row {
   height: 150px;
   width: 750px;
 }
+
 .h_lad {
   height: 150px;
   width: 300px;
   float: left;
 }
+
 .h_lad_row {
   height: 50px;
   width: 300px;
   float: left;
 }
+
 .h_lad_cell {
   height: 50px;
   width: 50px;
@@ -88,6 +109,7 @@
   box-sizing: border-box;
   text-align: center;
 }
+
 .ludo_home {
   height: 0;
   width: 0;
@@ -97,7 +119,49 @@
   border-bottom: 75px solid blue;
   float: left;
 }
+
 .star {
   font-size: 32px;
   text-align: center;
 }
+
+.game-info {
+  text-align: center;
+  margin-bottom: 20px;
+  background: #fff;
+  padding: 15px;
+  border-radius: 10px;
+  width: 300px;
+  margin: 10px auto;
+}
+
+.game-info h2 {
+  font-size: 20px;
+  margin-bottom: 10px;
+}
+
+.game-info button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.game-info p {
+  font-size: 18px;
+  margin-top: 10px;
+}
+
+.token {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.red { background-color: red; }
+.green { background-color: green; }
+.blue { background-color: blue; }
+.yellow { background-color: yellow; }
