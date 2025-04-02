@@ -40,5 +40,34 @@ Open index.html in your browser to start playing!
 [ ] Multiplayer Mode (Local & Online)
 [ ] Leaderboard & Timed Turns
 
+
+Game.js includes:
+- Game Constants and State:
+  - Player colors, paths, and special cells
+  - Token positions and state tracking- 
+  - Current player turn and dice values
+
+- Game Mechanics:
+  - Rolling the dice (generates random number 1-6)
+  - Moving tokens based on dice rolls
+  - Token capturing (when landing on an opponent's token)
+  - Safe cells (starred cells where tokens can't be captured)
+  - Home paths for each color
+
+- Game Rules Implemented:
+  - Players need to roll a 6 to move tokens out of base
+  - Tokens follow their color-specific paths around the board
+  - When landing on an opponent's token, it gets sent back to base
+  - Tokens need to enter home stretch in exact count
+  - Players take turns in clockwise order (red → green → yellow → blue)
+  - Player gets another turn after rolling a 6
+
+- UI Interactions:
+  - Click handlers for tokens
+  - Visual feedback for current player
+  - Dice roll display
+  - Board updates after each move
+  - Win condition checking
+
 📜 License
 This project is open-source under the MIT License.

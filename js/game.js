@@ -1,183 +1,315 @@
-const players = ["red", "blue", "yellow", "green"];
-let currentPlayerIndex = 0;
-let playerPositions = {
-  red: -1,
-  blue: -1,
-  yellow: -1,
-  green: -1,
+// Initial game set ups
+const COLORS = ["red", "green", "yellow", "blue"];
+const HOME_POSITIONS = {
+  red: [0, 1, 2, 3], // Each player's home tokens
+  green: [4, 5, 6, 7],
+  yellow: [8, 9, 10, 11],
+  blue: [12, 13, 14, 15],
 };
-
-// Define board path (coordinates for each step)
-const boardPath = {
+const START_POSITIONS = { red: 0, green: 13, yellow: 26, blue: 39 }; // For each color, home cell values
+const SAFE_CELLS = [0, 8, 13, 21, 26, 34, 39, 47]; // Cells with stars - tokens cannot be eaten here
+// each color tokens have a predicted path
+const PATHS = {
   red: [
-    [6, 0],
-    [6, 1],
-    [6, 2],
-    [6, 3],
-    [6, 4],
-    [6, 5], // First vertical path
-    [5, 6],
-    [4, 6],
-    [3, 6],
-    [2, 6],
-    [1, 6],
-    [0, 6], // Left horizontal path
-    [0, 7],
-    [0, 8],
-    [1, 8],
-    [2, 8],
-    [3, 8],
-    [4, 8],
-    [5, 8], // Going right
-    [6, 9],
-    [6, 10],
-    [6, 11],
-    [6, 12],
-    [6, 13],
-    [6, 14], // Down to bottom row
-    [7, 14],
-    [8, 14],
-    [8, 13],
-    [8, 12],
-    [8, 11],
-    [8, 10], // Left to home column
-    [7, 10], // Home
-  ],
-  blue: [
-    [0, 8],
-    [1, 8],
-    [2, 8],
-    [3, 8],
-    [4, 8],
-    [5, 8], // Moving down
-    [6, 9],
-    [6, 10],
-    [6, 11],
-    [6, 12],
-    [6, 13],
-    [6, 14], // Moving right
-    [7, 14],
-    [8, 14],
-    [9, 14],
-    [10, 14],
-    [11, 14],
-    [12, 14], // Moving up
-    [12, 13],
-    [12, 12],
-    [11, 12],
-    [10, 12],
-    [9, 12],
-    [8, 12], // Moving left
-    [8, 11],
-    [8, 10],
-    [8, 9],
-    [8, 8],
-    [8, 7],
-    [8, 6], // Moving up to home column
-    [8, 7], // Home
-  ],
-  yellow: [
-    [8, 14],
-    [8, 13],
-    [8, 12],
-    [8, 11],
-    [8, 10],
-    [8, 9], // Moving left
-    [7, 8],
-    [6, 8],
-    [5, 8],
-    [4, 8],
-    [3, 8],
-    [2, 8], // Moving up
-    [2, 7],
-    [2, 6],
-    [3, 6],
-    [4, 6],
-    [5, 6],
-    [6, 6], // Moving right
-    [7, 5],
-    [7, 4],
-    [7, 3],
-    [7, 2],
-    [7, 1],
-    [7, 0], // Moving up
-    [8, 0],
-    [9, 0],
-    [10, 0],
-    [11, 0],
-    [12, 0],
-    [13, 0], // Moving right
-    [13, 1], // Home
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    "RH1",
+    "RH2",
+    "RH3",
+    "RH4",
+    "RH5",
   ],
   green: [
-    [14, 6],
-    [13, 6],
-    [12, 6],
-    [11, 6],
-    [10, 6],
-    [9, 6], // Moving up
-    [8, 5],
-    [8, 4],
-    [8, 3],
-    [8, 2],
-    [8, 1],
-    [8, 0], // Moving left
-    [7, 0],
-    [6, 0],
-    [5, 0],
-    [4, 0],
-    [3, 0],
-    [2, 0], // Moving down
-    [2, 1],
-    [2, 2],
-    [3, 2],
-    [4, 2],
-    [5, 2],
-    [6, 2], // Moving right
-    [7, 3],
-    [7, 4],
-    [7, 5],
-    [7, 6],
-    [7, 7],
-    [7, 8], // Moving down to home column
-    [7, 7], // Home
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    "GH1",
+    "GH2",
+    "GH3",
+    "GH4",
+    "GH5",
+  ],
+  yellow: [
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    "YH1",
+    "YH2",
+    "YH3",
+    "YH4",
+    "YH5",
+  ],
+  blue: [
+    39,
+    40,
+    41,
+    42,
+    43,
+    44,
+    45,
+    46,
+    47,
+    48,
+    49,
+    50,
+    51,
+    0,
+    1,
+    2,
+    3,
+    4,
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11,
+    12,
+    13,
+    14,
+    15,
+    16,
+    17,
+    18,
+    19,
+    20,
+    21,
+    22,
+    23,
+    24,
+    25,
+    26,
+    27,
+    28,
+    29,
+    30,
+    31,
+    32,
+    33,
+    34,
+    35,
+    36,
+    37,
+    38,
+    "BH1",
+    "BH2",
+    "BH3",
+    "BH4",
+    "BH5",
   ],
 };
 
-// Roll Dice
-document.getElementById("rollDice").addEventListener("click", function () {
-  let roll = Math.floor(Math.random() * 6) + 1;
-  document.getElementById("diceResult").innerText = `🎲 ${roll}`;
+// Game state
+const gameState = {
+  // TODO not updating
+  currentPlayer: "red", // Start with red player
+  diceValue: null,
+  hasRolled: false,
+  //
+  tokens: {
+    red: [
+      { inBase: true, position: null, completed: false },
+      { inBase: true, position: null, completed: false },
+      { inBase: true, position: null, completed: false },
+      { inBase: true, position: null, completed: false },
+    ],
+    green: [
+      { inBase: true, position: null, completed: false },
+      { inBase: true, position: null, completed: false },
+      { inBase: true, position: null, completed: false },
+      { inBase: true, position: null, completed: false },
+    ],
+    yellow: [
+      { inBase: true, position: null, completed: false },
+      { inBase: true, position: null, completed: false },
+      { inBase: true, position: null, completed: false },
+      { inBase: true, position: null, completed: false },
+    ],
+    blue: [
+      { inBase: true, position: null, completed: false },
+      { inBase: true, position: null, completed: false },
+      { inBase: true, position: null, completed: false },
+      { inBase: true, position: null, completed: false },
+    ],
+  },
+  winners: [],
+};
 
-  let currentPlayer = players[currentPlayerIndex];
-  let piece = document.getElementById(`${currentPlayer}1`);
+// DOM elements
+const rollDiceBtn = document.getElementById("rollDice");
+const diceResult = document.getElementById("diceResult");
+console.log(diceResult);
+const currentTurnDisplay = document.getElementById("currentTurn");
+console.log(currentTurnDisplay);
 
-  if (playerPositions[currentPlayer] === -1) {
-    if (roll === 6) {
-      playerPositions[currentPlayer] = 0;
-      movePiece(piece, currentPlayer, 0);
-    } else {
-      switchTurn();
-    }
-  } else {
-    let newPosition = playerPositions[currentPlayer] + roll;
-    if (newPosition < boardPath[currentPlayer].length) {
-      playerPositions[currentPlayer] = newPosition;
-      movePiece(piece, currentPlayer, newPosition);
-    }
-    switchTurn();
-  }
-});
+document.addEventListener("DOMContentLoaded", initializeGame);
+rollDiceBtn.addEventListener("click", rollDice);
 
-// Move Piece
-function movePiece(piece, color, position) {
-  let [x, y] = boardPath[color][position];
-  piece.style.transform = `translate(${x * 40}px, ${y * 40}px)`;
+function initializeGame() {
+  // Place tokens in their starting positions
+  renderBoard();
+
+  // Set up click handlers for tokens
+  setupTokenClickHandlers();
+
+  // Update the current turn display
+  updateTurnDisplay();
 }
 
-// Switch Turn
-function switchTurn() {
-  currentPlayerIndex = (currentPlayerIndex + 1) % players.length;
-  document.getElementById("current-player").innerText =
-    players[currentPlayerIndex].charAt(0).toUpperCase() + players[currentPlayerIndex].slice(1);
+// Setup click handlers for all tokens
+function setupTokenClickHandlers() {
+  const tokens = document.querySelectorAll(".token");
+  tokens.forEach((token) => {
+    token.addEventListener("click", handleTokenClick);
+  });
 }
+
