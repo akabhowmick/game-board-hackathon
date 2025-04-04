@@ -208,19 +208,13 @@ body {
 
 /* Center home area */
 .ludo_home {
-  width: 120px;
-  height: 120px;
-  background: linear-gradient(
-    135deg,
-    #ff3333 0%,
-    #ff3333 25%,
-    #33cc33 25%,
-    #33cc33 50%,
-    #3399ff 50%,
-    #3399ff 75%,
-    #ffcc00 75%,
-    #ffcc00 100%
-  );
+  margin: auto;
+  width: 0;
+  height: 0;
+  border-left: 60px solid red;
+  border-right: 60px solid yellow;
+  border-top: 60px solid green;
+  border-bottom: 60px solid blue;
   position: relative;
 }
 
