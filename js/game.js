@@ -1,35 +1,40 @@
-import { COLORS, HOME_POSITIONS, START_POSITIONS, SAFE_CELLS, PATHS } from "./initialGameConstants.js";
+import {
+  COLORS,
+  HOME_POSITIONS,
+  START_POSITIONS,
+  SAFE_CELLS,
+  PATHS,
+} from "./initialGameConstants.js";
+
 // Game state
 const gameState = {
-  // TODO not updating
   currentPlayer: "red", // Start with red player
   diceValue: null,
   hasRolled: false,
-  //
   tokens: {
     red: [
-      { inBase: true, position: null, completed: false },
-      { inBase: true, position: null, completed: false },
-      { inBase: true, position: null, completed: false },
-      { inBase: true, position: null, completed: false },
+      { inBase: true, position: null, completed: false, baseIndex: 0 },
+      { inBase: true, position: null, completed: false, baseIndex: 1 },
+      { inBase: true, position: null, completed: false, baseIndex: 2 },
+      { inBase: true, position: null, completed: false, baseIndex: 3 },
     ],
     green: [
-      { inBase: true, position: null, completed: false },
-      { inBase: true, position: null, completed: false },
-      { inBase: true, position: null, completed: false },
-      { inBase: true, position: null, completed: false },
+      { inBase: true, position: null, completed: false, baseIndex: 0 },
+      { inBase: true, position: null, completed: false, baseIndex: 1 },
+      { inBase: true, position: null, completed: false, baseIndex: 2 },
+      { inBase: true, position: null, completed: false, baseIndex: 3 },
     ],
     yellow: [
-      { inBase: true, position: null, completed: false },
-      { inBase: true, position: null, completed: false },
-      { inBase: true, position: null, completed: false },
-      { inBase: true, position: null, completed: false },
+      { inBase: true, position: null, completed: false, baseIndex: 0 },
+      { inBase: true, position: null, completed: false, baseIndex: 1 },
+      { inBase: true, position: null, completed: false, baseIndex: 2 },
+      { inBase: true, position: null, completed: false, baseIndex: 3 },
     ],
     blue: [
-      { inBase: true, position: null, completed: false },
-      { inBase: true, position: null, completed: false },
-      { inBase: true, position: null, completed: false },
-      { inBase: true, position: null, completed: false },
+      { inBase: true, position: null, completed: false, baseIndex: 0 },
+      { inBase: true, position: null, completed: false, baseIndex: 1 },
+      { inBase: true, position: null, completed: false, baseIndex: 2 },
+      { inBase: true, position: null, completed: false, baseIndex: 3 },
     ],
   },
   winners: [],
@@ -38,29 +43,47 @@ const gameState = {
 // DOM elements
 const rollDiceBtn = document.getElementById("rollDice");
 const diceResult = document.getElementById("diceResult");
-console.log(diceResult);
 const currentTurnDisplay = document.getElementById("currentTurn");
-console.log(currentTurnDisplay);
 
+// Wait for DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", initializeGame);
+// Add dice roll event listener
 rollDiceBtn.addEventListener("click", rollDice);
 
 function initializeGame() {
-  // Place tokens in their starting positions
-  renderBoard();
-
-  // Set up click handlers for tokens
+  console.log("Initializing game...");
+  
+  // Set up click handlers for all tokens (base tokens + board tokens)
   setupTokenClickHandlers();
-
+  
   // Update the current turn display
   updateTurnDisplay();
+  
+  console.log("Game initialized!");
 }
 
-// Setup click handlers for all tokens
+// Setup click handlers for all tokens (base and board)
 function setupTokenClickHandlers() {
-  const tokens = document.querySelectorAll(".token");
-  tokens.forEach((token) => {
-    token.addEventListener("click", handleTokenClick);
+  // Set up handlers for base tokens
+  setupBaseTokenHandlers();
+  
+  // Board tokens will get handlers when they're created
+}
+
+// Setup handlers for tokens in base areas
+function setupBaseTokenHandlers() {
+  // For each color, get the base container
+  COLORS.forEach(color => {
+    // Find all tokens of this color in the base
+    const baseTokens = document.querySelectorAll(`.box .circle.border_${color} .token.${color}`);
+    
+    baseTokens.forEach((token, index) => {
+      // Store the token index as a data attribute
+      token.setAttribute('data-index', index);
+      
+      // Add click handler
+      token.addEventListener("click", handleTokenClick);
+    });
   });
 }
 
@@ -84,6 +107,7 @@ function rollDice() {
   if (!canPlayerMove()) {
     // If player can't move, wait a second and then move to next player
     setTimeout(() => {
+      alert(`No moves available for ${gameState.currentPlayer}. Moving to next player.`);
       nextTurn();
     }, 1000);
   }
@@ -103,11 +127,7 @@ function canPlayerMove() {
   }
 
   // Check if any token on the board can move
-  if (tokens.some((token) => !token.inBase && !token.completed)) {
-    return true;
-  }
-
-  return false;
+  return tokens.some((token) => !token.inBase && !token.completed);
 }
 
 // Handle token click
@@ -128,12 +148,24 @@ function handleTokenClick(event) {
     return;
   }
 
-  // Find the token index
-  const tokenElement = token;
-  const tokenIndex = findTokenIndex(tokenElement);
+  // Get the token index
+  let tokenIndex;
+  
+  // Check if it's a base token (has data-index attribute)
+  if (token.hasAttribute('data-index')) {
+    tokenIndex = parseInt(token.getAttribute('data-index'));
+  } else {
+    // For board tokens, find by position
+    const position = token.parentElement.id;
+    tokenIndex = findTokenIndexByPosition(tokenColor, position);
+  }
 
-  // Get the token data
-  const tokenData = gameState.tokens[tokenColor][tokenIndex];
+  if (tokenIndex === -1) {
+    console.error("Token index not found!");
+    return;
+  }
+
+  console.log(`Clicked ${tokenColor} token at index ${tokenIndex}`);
 
   // Handle token movement
   if (moveToken(tokenColor, tokenIndex)) {
@@ -154,14 +186,11 @@ function handleTokenClick(event) {
   }
 }
 
-// Find the index of a token element in the DOM
-function findTokenIndex(tokenElement) {
-  // Get all tokens of the same color
-  const color = tokenElement.classList[1];
-  const allTokensOfColor = document.querySelectorAll(`.token.${color}`);
-
-  // Find the index of the clicked token
-  return Array.from(allTokensOfColor).indexOf(tokenElement);
+// Find token index by its position on the board
+function findTokenIndexByPosition(color, position) {
+  return gameState.tokens[color].findIndex(token => 
+    !token.inBase && !token.completed && token.position === position
+  );
 }
 
 // Move a token based on dice roll
@@ -191,7 +220,13 @@ function moveToken(color, tokenIndex) {
   // If token is already on the board, move it
   if (!token.inBase && !token.completed) {
     // Calculate the new position
-    const currentPathIndex = PATHS[color].indexOf(token.position);
+    const currentPathIndex = PATHS[color].indexOf(String(token.position));
+    
+    if (currentPathIndex === -1) {
+      console.error(`Invalid position: ${token.position} for color ${color}`);
+      return false;
+    }
+    
     const newPathIndex = currentPathIndex + diceValue;
 
     // Check if the move would go beyond the home stretch
@@ -204,11 +239,11 @@ function moveToken(color, tokenIndex) {
     token.position = PATHS[color][newPathIndex];
 
     // Check if token has reached home
-    // ! issue here
-    if (token.position.startsWith(color[0].toUpperCase() + "H")) {
+    if (String(token.position).startsWith(color[0].toUpperCase() + "H")) {
       // Check if reached the end of home path
       if (token.position === `${color[0].toUpperCase()}H5`) {
         token.completed = true;
+        alert(`${color} token has reached home!`);
       }
     } else {
       // Check if there's a capture
@@ -236,7 +271,7 @@ function checkCapture(color, position) {
 
     // Check each token of this color
     gameState.tokens[otherColor].forEach((token, index) => {
-      if (!token.inBase && token.position === position) {
+      if (!token.inBase && !token.completed && token.position === position) {
         // Capture: Send token back to base
         token.inBase = true;
         token.position = null;
@@ -279,32 +314,38 @@ function updateTurnDisplay() {
 
 // Render the game board based on the current state
 function renderBoard() {
+  console.log("Rendering board...");
+  
   // Clear all tokens from the board (except those in base)
   clearBoardTokens();
-
+  
   // Place tokens according to their positions
   for (const color of COLORS) {
     gameState.tokens[color].forEach((token, index) => {
       if (!token.inBase && !token.completed) {
-        // Place token on the board
-        const cell = document.getElementById(token.position);
+        // Place token on the board in the cell with matching ID
+        const cell = document.getElementById(String(token.position));
         if (cell) {
-          const tokenElement = document.createElement("div");
-          tokenElement.classList.add("token", color);
-          tokenElement.addEventListener("click", handleTokenClick);
+          const tokenElement = document.createElement('div');
+          tokenElement.classList.add('token', color);
+          tokenElement.addEventListener('click', handleTokenClick);
           cell.appendChild(tokenElement);
+        } else {
+          console.error(`Cell with ID ${token.position} not found`);
         }
       } else if (token.completed) {
         // Show completed tokens in their final home spot
         const cell = document.getElementById(`${color[0].toUpperCase()}H5`);
         if (cell) {
-          const tokenElement = document.createElement("div");
-          tokenElement.classList.add("token", color, "completed");
+          const tokenElement = document.createElement('div');
+          tokenElement.classList.add('token', color, 'completed');
           cell.appendChild(tokenElement);
         }
       }
     });
   }
+  
+  console.log("Board rendering complete");
 }
 
 // Clear all tokens from the board cells

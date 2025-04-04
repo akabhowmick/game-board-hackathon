@@ -1,167 +1,295 @@
-* {
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-family: Arial, sans-serif;
   margin: 0;
-  padding: 0;
-}
-
-.outer {
-  height: 750px;
-  width: 750px;
-  margin: 0px auto;
-  border: 1px solid red;
-}
-
-.box_row {
-  height: 300px;
-  width: 750px;
-}
-
-.box {
-  height: 200px;
-  width: 200px;
-  float: left;
-  position: relative;
-}
-
-.v_lad {
-  height: 300px;
-  width: 150px;
-  float: left;
-}
-
-.circle {
-  height: 50px;
-  width: 50px;
-  margin: 25px;
-  border-radius: 50%;
-  box-sizing: border-box;
-  float: left;
-  position: relative;
-}
-
-.border_red {
-  border: 5px solid red;
-}
-
-.border_green {
-  border: 5px solid green;
-}
-
-.border_blue {
-  border: 5px solid blue;
-}
-
-.border_yellow {
-  border: 5px solid yellow;
-}
-
-.v_lad_row {
-  height: 50px;
-  width: 150px;
-}
-
-.v_lad_cell {
-  height: 50px;
-  width: 50px;
-  border: 1px solid #000;
-  box-sizing: border-box;
-  float: left;
-  text-align: center;
-}
-
-.red {
-  background: red;
-}
-
-.green {
-  background: green;
-}
-
-.blue {
-  background: blue;
-}
-
-.yellow {
-  background: yellow;
-}
-
-.middle_row {
-  height: 150px;
-  width: 750px;
-}
-
-.h_lad {
-  height: 150px;
-  width: 300px;
-  float: left;
-}
-
-.h_lad_row {
-  height: 50px;
-  width: 300px;
-  float: left;
-}
-
-.h_lad_cell {
-  height: 50px;
-  width: 50px;
-  border: 1px solid #000;
-  float: left;
-  box-sizing: border-box;
-  text-align: center;
-}
-
-.ludo_home {
-  height: 0;
-  width: 0;
-  border-left: 75px solid red;
-  border-right: 75px solid yellow;
-  border-top: 75px solid green;
-  border-bottom: 75px solid blue;
-  float: left;
-}
-
-.star {
-  font-size: 32px;
-  text-align: center;
+  padding: 20px;
+  background-color: #f5f5f5;
 }
 
 .game-info {
-  text-align: center;
-  margin-bottom: 20px;
-  background: #fff;
-  padding: 15px;
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 15px 25px;
   border-radius: 10px;
-  width: 300px;
-  margin: 10px auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.game-info h2 {
-  font-size: 20px;
-  margin-bottom: 10px;
+#currentTurn {
+  font-weight: bold;
+  font-size: 1.2em;
 }
 
-.game-info button {
-  padding: 10px 20px;
+#rollDice {
+  padding: 12px 25px;
   font-size: 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
   cursor: pointer;
+  margin: 15px 0;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: all 0.3s ease;
 }
 
-.game-info p {
-  font-size: 18px;
-  margin-top: 10px;
+#rollDice:hover {
+  background-color: #45a049;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.token {
-  width: 20px;
-  height: 20px;
+#rollDice:active {
+  transform: translateY(0);
+}
+
+#diceResult {
+  font-size: 28px;
+  margin: 10px 0;
+}
+
+/* Main board container */
+.outer {
+  border: 3px solid #333;
+  border-radius: 8px;
+  background-color: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.box_row {
+  display: flex;
+}
+
+/* Home bases */
+.box {
+  width: 180px;
+  height: 180px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 20px;
+  padding: 20px;
+  background-color: white;
+}
+
+/* Token circles inside home bases */
+.circle {
   border-radius: 50%;
+  background-color: white;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.2);
+}
+
+.border_red {
+  border: 3px solid red;
+  background-color: rgba(255, 0, 0, 0.05);
+}
+
+.border_green {
+  border: 3px solid green;
+  background-color: rgba(0, 128, 0, 0.05);
+}
+
+.border_blue {
+  border: 3px solid blue;
+  background-color: rgba(0, 0, 255, 0.05);
+}
+
+.border_yellow {
+  border: 3px solid yellow;
+  background-color: rgba(255, 255, 0, 0.05);
+}
+
+/* Player tokens */
+.token {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  margin: 4px;
+  cursor: pointer;
+  transition: transform 0.2s, box-shadow 0.2s;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.token:hover {
+  transform: scale(1.15);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.4);
+}
+
+.token.red {
+  background-color: #ff3333;
+  border: 2px solid #cc0000;
+}
+
+.token.green {
+  background-color: #33cc33;
+  border: 2px solid #009900;
+}
+
+.token.blue {
+  background-color: #3399ff;
+  border: 2px solid #0066cc;
+}
+
+.token.yellow {
+  background-color: #ffcc00;
+  border: 2px solid #cc9900;
+}
+
+.token.completed {
+  border: 2px solid gold;
+  box-shadow: 0 0 10px gold;
+}
+
+/* Game paths */
+.v_lad,
+.h_lad {
+  display: flex;
+  flex-direction: column;
+}
+
+.v_lad_row,
+.h_lad_row {
+  display: flex;
+}
+
+.v_lad_cell,
+.h_lad_cell {
+  width: 3.5rem;
+  height: 3.2rem;
+  border: 1px solid #ccc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  background-color: #f9f9f9;
+  transition: background-color 0.2s;
+}
+
+.v_lad_cell:hover,
+.h_lad_cell:hover {
+  background-color: #f0f0f0;
+}
+
+/* Color-specific path cells */
+.v_lad_cell.red,
+.h_lad_cell.red {
+  background-color: rgba(255, 0, 0, 0.15);
+}
+
+.v_lad_cell.green,
+.h_lad_cell.green {
+  background-color: rgba(0, 128, 0, 0.15);
+}
+
+.v_lad_cell.blue,
+.h_lad_cell.blue {
+  background-color: rgba(0, 0, 255, 0.15);
+}
+
+.v_lad_cell.yellow,
+.h_lad_cell.yellow {
+  background-color: rgba(255, 255, 0, 0.15);
+}
+
+/* Middle section of board */
+.middle_row {
+  display: flex;
+}
+
+/* Center home area */
+.ludo_home {
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(
+    135deg,
+    #ff3333 0%,
+    #ff3333 25%,
+    #33cc33 25%,
+    #33cc33 50%,
+    #3399ff 50%,
+    #3399ff 75%,
+    #ffcc00 75%,
+    #ffcc00 100%
+  );
+  position: relative;
+}
+
+.ludo_home::after {
+  content: "HOME";
   position: absolute;
   top: 50%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%) rotate(-45deg);
+  color: white;
+  font-weight: bold;
+  font-size: 18px;
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.5);
 }
 
-.red { background-color: red; }
-.green { background-color: green; }
-.blue { background-color: blue; }
-.yellow { background-color: yellow; }
+/* Safe cells with stars */
+.star {
+  color: gold;
+  font-size: 18px;
+  text-shadow: 0 0 3px rgba(0, 0, 0, 0.3);
+}
+
+/* Make cell IDs visible for debugging */
+.v_lad_cell::after,
+.h_lad_cell::after {
+  content: attr(id);
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  font-size: 7px;
+  color: #999;
+}
+
+/* Add some dimension to the board */
+.outer {
+  position: relative;
+}
+
+.outer::before {
+  content: "";
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  right: 5px;
+  bottom: 5px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  pointer-events: none;
+}
+
+.active-player {
+  animation: pulse 2s infinite;
+}
+
+@keyframes pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
+  }
+  70% {
+    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
+  }
+}
+
+.cell-label {
+  position: absolute;
+  bottom: 2px;
+  right: 2px;
+  font-size: 7px;
+  color: #999;
+}
