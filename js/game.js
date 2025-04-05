@@ -45,43 +45,26 @@ const rollDiceBtn = document.getElementById("rollDice");
 const diceResult = document.getElementById("diceResult");
 const currentTurnDisplay = document.getElementById("currentTurn");
 
-// Wait for DOM to be fully loaded
 document.addEventListener("DOMContentLoaded", initializeGame);
-// Add dice roll event listener
 rollDiceBtn.addEventListener("click", rollDice);
 
 function initializeGame() {
-  console.log("Initializing game...");
-  
-  // Set up click handlers for all tokens (base tokens + board tokens)
+  // Each token has a handler so that it can work properly 
   setupTokenClickHandlers();
-  
-  // Update the current turn display
   updateTurnDisplay();
-  
-  console.log("Game initialized!");
 }
 
-// Setup click handlers for all tokens (base and board)
+// Setup click handlers for all tokens 
 function setupTokenClickHandlers() {
-  // Set up handlers for base tokens
   setupBaseTokenHandlers();
-  
-  // Board tokens will get handlers when they're created
 }
 
 // Setup handlers for tokens in base areas
 function setupBaseTokenHandlers() {
-  // For each color, get the base container
-  COLORS.forEach(color => {
-    // Find all tokens of this color in the base
+  COLORS.forEach((color) => {
     const baseTokens = document.querySelectorAll(`.box .circle.border_${color} .token.${color}`);
-    
     baseTokens.forEach((token, index) => {
-      // Store the token index as a data attribute
-      token.setAttribute('data-index', index);
-      
-      // Add click handler
+      token.setAttribute("data-index", index);
       token.addEventListener("click", handleTokenClick);
     });
   });
@@ -94,13 +77,8 @@ function rollDice() {
     return;
   }
 
-  // Generate random number between 1-6
   gameState.diceValue = Math.floor(Math.random() * 6) + 1;
-
-  // Update the dice display
   diceResult.textContent = gameState.diceValue;
-
-  // Mark that player has rolled
   gameState.hasRolled = true;
 
   // Check if the player can make any moves
@@ -132,7 +110,6 @@ function canPlayerMove() {
 
 // Handle token click
 function handleTokenClick(event) {
-  // Only process clicks if player has rolled the dice
   if (!gameState.hasRolled) {
     alert("Please roll the dice first!");
     return;
@@ -140,7 +117,7 @@ function handleTokenClick(event) {
 
   // Get the clicked token
   const token = event.target;
-  const tokenColor = token.classList[1]; // The second class is the color
+  const tokenColor = token.classList[1]; 
 
   // Only allow current player to move their tokens
   if (tokenColor !== gameState.currentPlayer) {
@@ -150,10 +127,10 @@ function handleTokenClick(event) {
 
   // Get the token index
   let tokenIndex;
-  
+
   // Check if it's a base token (has data-index attribute)
-  if (token.hasAttribute('data-index')) {
-    tokenIndex = parseInt(token.getAttribute('data-index'));
+  if (token.hasAttribute("data-index")) {
+    tokenIndex = parseInt(token.getAttribute("data-index"));
   } else {
     // For board tokens, find by position
     const position = token.parentElement.id;
@@ -188,8 +165,8 @@ function handleTokenClick(event) {
 
 // Find token index by its position on the board
 function findTokenIndexByPosition(color, position) {
-  return gameState.tokens[color].findIndex(token => 
-    !token.inBase && !token.completed && token.position === position
+  return gameState.tokens[color].findIndex(
+    (token) => !token.inBase && !token.completed && token.position === position
   );
 }
 
@@ -221,12 +198,12 @@ function moveToken(color, tokenIndex) {
   if (!token.inBase && !token.completed) {
     // Calculate the new position
     const currentPathIndex = PATHS[color].indexOf(String(token.position));
-    
+
     if (currentPathIndex === -1) {
       console.error(`Invalid position: ${token.position} for color ${color}`);
       return false;
     }
-    
+
     const newPathIndex = currentPathIndex + diceValue;
 
     // Check if the move would go beyond the home stretch
@@ -315,10 +292,10 @@ function updateTurnDisplay() {
 // Render the game board based on the current state
 function renderBoard() {
   console.log("Rendering board...");
-  
+
   // Clear all tokens from the board (except those in base)
   clearBoardTokens();
-  
+
   // Place tokens according to their positions
   for (const color of COLORS) {
     gameState.tokens[color].forEach((token, index) => {
@@ -326,9 +303,9 @@ function renderBoard() {
         // Place token on the board in the cell with matching ID
         const cell = document.getElementById(String(token.position));
         if (cell) {
-          const tokenElement = document.createElement('div');
-          tokenElement.classList.add('token', color);
-          tokenElement.addEventListener('click', handleTokenClick);
+          const tokenElement = document.createElement("div");
+          tokenElement.classList.add("token", color);
+          tokenElement.addEventListener("click", handleTokenClick);
           cell.appendChild(tokenElement);
         } else {
           console.error(`Cell with ID ${token.position} not found`);
@@ -337,14 +314,14 @@ function renderBoard() {
         // Show completed tokens in their final home spot
         const cell = document.getElementById(`${color[0].toUpperCase()}H5`);
         if (cell) {
-          const tokenElement = document.createElement('div');
-          tokenElement.classList.add('token', color, 'completed');
+          const tokenElement = document.createElement("div");
+          tokenElement.classList.add("token", color, "completed");
           cell.appendChild(tokenElement);
         }
       }
     });
   }
-  
+
   console.log("Board rendering complete");
 }
 
