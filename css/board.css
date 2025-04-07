@@ -273,6 +273,88 @@ body {
   animation: pulse 2s infinite;
 }
 
+.rules-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 600px;
+  max-height: 80vh;
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+  padding: 20px;
+  z-index: 1000;
+  overflow-y: auto;
+  display: none;
+}
+
+.rules-container h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+  border-bottom: 2px solid #eee;
+  padding-bottom: 10px;
+}
+
+.rules-section {
+  margin-bottom: 15px;
+}
+
+.rules-section h3 {
+  color: #444;
+  margin-bottom: 8px;
+  font-size: 1.2em;
+}
+
+.rules-section p,
+.rules-section li {
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 5px;
+}
+
+.rules-section ul {
+  padding-left: 20px;
+}
+
+.close-rules-btn {
+  display: block;
+  margin: 20px auto 0;
+  padding: 8px 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.close-rules-btn:hover {
+  background-color: #45a049;
+}
+
+.show-rules {
+  display: block;
+}
+
+/* Button to open rules */
+#showRules {
+  padding: 8px 16px;
+  background-color: #2196f3;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  margin: 10px;
+}
+
+#showRules:hover {
+  background-color: #0b7dda;
+}
+
 @keyframes pulse {
   0% {
     box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);

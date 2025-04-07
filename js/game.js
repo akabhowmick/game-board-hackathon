@@ -359,3 +359,28 @@ function clearBoardTokens() {
     });
   });
 }
+
+// Modal for the rules and gameplay
+document.addEventListener('DOMContentLoaded', function() {
+  const showRulesBtn = document.createElement('button');
+  showRulesBtn.id = 'showRules';
+  showRulesBtn.textContent = 'Game Rules';
+  
+  const gameControls = document.querySelector('.game-controls') || document.body;
+  gameControls.prepend(showRulesBtn);
+  
+  document.getElementById('showRules').addEventListener('click', function() {
+    document.getElementById('gameRules').classList.add('show-rules');
+  });
+  
+  document.getElementById('closeRules').addEventListener('click', function() {
+    document.getElementById('gameRules').classList.remove('show-rules');
+  });
+  
+  window.addEventListener('click', function(event) {
+    const rulesModal = document.getElementById('gameRules');
+    if (event.target === rulesModal) {
+      rulesModal.classList.remove('show-rules');
+    }
+  });
+});
