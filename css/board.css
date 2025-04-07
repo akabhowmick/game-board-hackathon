@@ -1,6 +1,7 @@
 body {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
+  gap: 20px;
   align-items: center;
   justify-content: center;
   font-family: Arial, sans-serif;
@@ -148,6 +149,10 @@ body {
 .token.completed {
   border: 2px solid gold;
   box-shadow: 0 0 10px gold;
+}
+
+.token.hidden {
+  display: none;
 }
 
 /* Game paths */

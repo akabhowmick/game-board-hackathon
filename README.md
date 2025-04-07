@@ -68,6 +68,3 @@ Game.js includes:
   - Dice roll display
   - Board updates after each move
   - Win condition checking
-
-📜 License
-This project is open-source under the MIT License.

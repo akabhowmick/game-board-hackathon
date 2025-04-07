@@ -49,12 +49,12 @@ document.addEventListener("DOMContentLoaded", initializeGame);
 rollDiceBtn.addEventListener("click", rollDice);
 
 function initializeGame() {
-  // Each token has a handler so that it can work properly 
+  // Each token has a handler so that it can work properly
   setupTokenClickHandlers();
   updateTurnDisplay();
 }
 
-// Setup click handlers for all tokens 
+// Setup click handlers for all tokens
 function setupTokenClickHandlers() {
   setupBaseTokenHandlers();
 }
@@ -65,6 +65,7 @@ function setupBaseTokenHandlers() {
     const baseTokens = document.querySelectorAll(`.box .circle.border_${color} .token.${color}`);
     baseTokens.forEach((token, index) => {
       token.setAttribute("data-index", index);
+      token.setAttribute("token-in-base", true);
       token.addEventListener("click", handleTokenClick);
     });
   });
@@ -117,7 +118,7 @@ function handleTokenClick(event) {
 
   // Get the clicked token
   const token = event.target;
-  const tokenColor = token.classList[1]; 
+  const tokenColor = token.classList[1];
 
   // Only allow current player to move their tokens
   if (tokenColor !== gameState.currentPlayer) {
@@ -125,14 +126,10 @@ function handleTokenClick(event) {
     return;
   }
 
-  // Get the token index
   let tokenIndex;
-
-  // Check if it's a base token (has data-index attribute)
   if (token.hasAttribute("data-index")) {
     tokenIndex = parseInt(token.getAttribute("data-index"));
   } else {
-    // For board tokens, find by position
     const position = token.parentElement.id;
     tokenIndex = findTokenIndexByPosition(tokenColor, position);
   }
@@ -178,6 +175,12 @@ function moveToken(color, tokenIndex) {
   // If token is in base, it can only move out with a 6
   if (token.inBase) {
     if (diceValue === 6) {
+      // hide the token when it goes out of base
+      const baseTokenElement = findBaseTokenElement(color, tokenIndex);
+      if (baseTokenElement) {
+        baseTokenElement.classList.add("hidden");
+      }
+
       // Move token out of base to its start position
       token.inBase = false;
       token.position = START_POSITIONS[color];
@@ -235,6 +238,18 @@ function moveToken(color, tokenIndex) {
   return false;
 }
 
+// Helper function to find the DOM element of a base token
+function findBaseTokenElement(color, tokenIndex) {
+  const baseTokens = document.querySelectorAll(`.box .circle.border_${color} .token.${color}`);
+  for (let i = 0; i < baseTokens.length; i++) {
+    const index = parseInt(baseTokens[i].getAttribute('data-index'));
+    if (index === tokenIndex) {
+      return baseTokens[i];
+    }
+  }
+  return null;
+}
+
 // Check if moving to this position would capture an opponent's token
 function checkCapture(color, position) {
   // Don't capture on safe cells
@@ -252,6 +267,12 @@ function checkCapture(color, position) {
         // Capture: Send token back to base
         token.inBase = true;
         token.position = null;
+
+        // Show the token in base again by removing the hidden class
+        const baseTokenElement = findBaseTokenElement(otherColor, index);
+        if (baseTokenElement) {
+          baseTokenElement.classList.remove("hidden");
+        }
 
         // Alert the players
         alert(`${color} captured ${otherColor}'s token!`);
