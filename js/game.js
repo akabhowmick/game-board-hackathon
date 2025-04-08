@@ -73,7 +73,12 @@ function setupBaseTokenHandlers() {
 // Roll the dice
 function rollDice() {
   if (gameState.hasRolled) {
-    alert("You already rolled the dice. Move a token or pass your turn.");
+    Swal.fire({
+      title: "Already Rolled",
+      text: "You already rolled the dice. Move a token or pass your turn.",
+      icon: "warning",
+      confirmButtonText: "OK",
+    });
     return;
   }
 
@@ -84,7 +89,15 @@ function rollDice() {
   // Check if the player can make any moves
   if (!canPlayerMove()) {
     setTimeout(() => {
-      alert(`No moves available for ${gameState.currentPlayer}. Moving to next player.`);
+      Swal.fire({
+        title: "No Moves Available",
+        text: `No moves available for ${gameState.currentPlayer}. Moving to next player.`,
+        icon: "info",
+        timer: 2000,
+        timerProgressBar: true,
+        showConfirmButton: false,
+      });
+
       nextTurn();
     }, 1000);
   }
@@ -110,7 +123,13 @@ function canPlayerMove() {
 // Handle token click
 function handleTokenClick(event) {
   if (!gameState.hasRolled) {
-    alert("Please roll the dice first!");
+    Swal.fire({
+      title: "Roll Dice First!",
+      text: "Please roll the dice first!",
+      icon: "error",
+      confirmButtonText: "OK",
+    });
+
     return;
   }
 
@@ -120,7 +139,13 @@ function handleTokenClick(event) {
 
   // Only allow current player to move their tokens
   if (tokenColor !== gameState.currentPlayer) {
-    alert("It's not your turn!");
+    Swal.fire({
+      title: "Wrong Turn",
+      text: "It's not your turn!",
+      icon: "error",
+      confirmButtonText: "OK",
+    });
+
     return;
   }
 
@@ -143,19 +168,37 @@ function handleTokenClick(event) {
   if (moveToken(tokenColor, tokenIndex)) {
     // Check for win condition
     if (checkWinCondition(tokenColor)) {
-      alert(`${tokenColor.toUpperCase()} player wins!`);
+      Swal.fire({
+        title: "Winner!",
+        html: `<span style="color:${tokenColor};font-size:1.2em;font-weight:bold">${tokenColor.toUpperCase()}</span> player wins!`,
+        icon: "success",
+        confirmButtonText: "Awesome!",
+      });
       gameState.winners.push(tokenColor);
       // Remove this color from play
       COLORS.splice(COLORS.indexOf(tokenColor), 1);
 
       if (COLORS.length === 1) {
-        alert(`Game over! Final rankings: ${gameState.winners.join(", ")}, ${COLORS[0]}`);
+        Swal.fire({
+          title: "Game Over!",
+          html: `<p>Final rankings:</p><ol>${gameState.winners
+            .map((color) => `<li style="color:${color}">${color}</li>`)
+            .join("")}<li style="color:${COLORS[0]}">${COLORS[0]}</li></ol>`,
+          icon: "success",
+          confirmButtonText: "Play Again",
+        });
       }
-      
+
       nextTurn();
     } else if (gameState.diceValue === 6) {
       // Player gets another turn if they rolled a 6
-      alert(`You rolled a 6! You get another turn.`);
+      Swal.fire({
+        title: "Extra Turn!",
+        text: "You rolled a 6! You get another turn.",
+        icon: "success",
+        timer: 1500,
+        showConfirmButton: false,
+      });
 
       // Reset dice state but keep same player
       gameState.hasRolled = false;
@@ -200,7 +243,12 @@ function moveToken(color, tokenIndex) {
       renderBoard();
       return true;
     } else {
-      alert("You need a 6 to move a token out of the base!");
+      Swal.fire({
+        title: "Invalid Move",
+        text: "You need a 6 to move a token out of the base!",
+        icon: "warning",
+        confirmButtonText: "OK",
+      });
       return false;
     }
   }
@@ -219,19 +267,31 @@ function moveToken(color, tokenIndex) {
 
     // Check if the move would go beyond the home stretch
     if (newPathIndex >= PATHS[color].length) {
-      alert("You cannot move this token that far!");
+      Swal.fire({
+        title: "Invalid Move",
+        text: "You cannot move this token that far!",
+        icon: "warning",
+        confirmButtonText: "OK",
+      });
+
       return false;
     }
 
     // Move the token
     token.position = PATHS[color][newPathIndex];
 
-    // Check if token has reached home
+    // Check if token has reached home; can't be outside with a six because you cannot reroll
     if (String(token.position).startsWith(color[0].toUpperCase() + "H")) {
       // Check if reached the end of home path
-      if (token.position === `${color[0].toUpperCase()}H5`) {
+      if (token.position === "HOME") {
         token.completed = true;
-        alert(`${color} token has reached home!`);
+        Swal.fire({
+          title: "Home Safe!",
+          text: `${color} token has reached home!`,
+          icon: "success",
+          timer: 1000,
+          showConfirmButton: false,
+        });
       }
     } else {
       // Check if there's a capture
@@ -282,8 +342,13 @@ function checkCapture(color, position) {
           baseTokenElement.classList.remove("hidden");
         }
 
-        // Alert the players
-        alert(`${color} captured ${otherColor}'s token!`);
+        Swal.fire({
+          title: "Capture!",
+          text: `${color} captured ${otherColor}'s token!`,
+          icon: "info",
+          timer: 1000,
+          showConfirmButton: false,
+        });
       }
     });
   }
