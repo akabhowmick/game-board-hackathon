@@ -68,3 +68,6 @@ Game.js includes:
   - Dice roll display
   - Board updates after each move
   - Win condition checking
+
+
+Hackathon Video Submission Link: https://www.loom.com/share/0f8a2dc98457447d8abf3e0c35b44be0?sid=ccd907d7-0fb9-45ad-934b-916ce9646d35 
