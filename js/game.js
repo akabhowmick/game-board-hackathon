@@ -49,7 +49,6 @@ document.addEventListener("DOMContentLoaded", initializeGame);
 rollDiceBtn.addEventListener("click", rollDice);
 
 function initializeGame() {
-  // Each token has a handler so that it can work properly
   setupTokenClickHandlers();
   updateTurnDisplay();
 }
@@ -84,7 +83,6 @@ function rollDice() {
 
   // Check if the player can make any moves
   if (!canPlayerMove()) {
-    // If player can't move, wait a second and then move to next player
     setTimeout(() => {
       alert(`No moves available for ${gameState.currentPlayer}. Moving to next player.`);
       nextTurn();
@@ -153,10 +151,20 @@ function handleTokenClick(event) {
       if (COLORS.length === 1) {
         alert(`Game over! Final rankings: ${gameState.winners.join(", ")}, ${COLORS[0]}`);
       }
-    }
+      
+      nextTurn();
+    } else if (gameState.diceValue === 6) {
+      // Player gets another turn if they rolled a 6
+      alert(`You rolled a 6! You get another turn.`);
 
-    // Move to next player's turn
-    nextTurn();
+      // Reset dice state but keep same player
+      gameState.hasRolled = false;
+      gameState.diceValue = null;
+      diceResult.textContent = "🎲";
+    } else {
+      // Normal case - move to next player
+      nextTurn();
+    }
   }
 }
 
@@ -242,7 +250,7 @@ function moveToken(color, tokenIndex) {
 function findBaseTokenElement(color, tokenIndex) {
   const baseTokens = document.querySelectorAll(`.box .circle.border_${color} .token.${color}`);
   for (let i = 0; i < baseTokens.length; i++) {
-    const index = parseInt(baseTokens[i].getAttribute('data-index'));
+    const index = parseInt(baseTokens[i].getAttribute("data-index"));
     if (index === tokenIndex) {
       return baseTokens[i];
     }
@@ -361,26 +369,25 @@ function clearBoardTokens() {
 }
 
 // Modal for the rules and gameplay
-document.addEventListener('DOMContentLoaded', function() {
-  const showRulesBtn = document.createElement('button');
-  showRulesBtn.id = 'showRules';
-  showRulesBtn.textContent = 'Game Rules';
-  
-  const gameControls = document.querySelector('.game-controls') || document.body;
-  gameControls.prepend(showRulesBtn);
-  
-  document.getElementById('showRules').addEventListener('click', function() {
-    document.getElementById('gameRules').classList.add('show-rules');
+document.addEventListener("DOMContentLoaded", function () {
+  const showRulesBtn = document.createElement("button");
+  showRulesBtn.id = "showRules";
+  showRulesBtn.textContent = "Game Rules";
+
+  const gameControls = document.querySelector(".game-controls") || document.body;
+
+  document.getElementById("showRules").addEventListener("click", function () {
+    document.getElementById("gameRules").classList.add("show-rules");
   });
-  
-  document.getElementById('closeRules').addEventListener('click', function() {
-    document.getElementById('gameRules').classList.remove('show-rules');
+
+  document.getElementById("closeRules").addEventListener("click", function () {
+    document.getElementById("gameRules").classList.remove("show-rules");
   });
-  
-  window.addEventListener('click', function(event) {
-    const rulesModal = document.getElementById('gameRules');
+
+  window.addEventListener("click", function (event) {
+    const rulesModal = document.getElementById("gameRules");
     if (event.target === rulesModal) {
-      rulesModal.classList.remove('show-rules');
+      rulesModal.classList.remove("show-rules");
     }
   });
 });

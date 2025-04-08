@@ -11,107 +11,7 @@
       <h2>Current Turn: <span id="currentTurn">Red</span></h2>
       <button id="rollDice">Roll Dice</button>
       <p>Dice Roll: <span id="diceResult">🎲</span></p>
-      <div id="gameRules" class="rules-container">
-        <h2>How to Play Ludo</h2>
-
-        <div class="rules-section">
-          <h3>Game Objective</h3>
-          <p>
-            Move all four of your tokens from the base to home by traveling around the board. The
-            first player to get all four tokens home wins!
-          </p>
-        </div>
-
-        <div class="rules-section">
-          <h3>Basic Rules</h3>
-          <ul>
-            <li>
-              <strong>Taking Turns:</strong> Players take turns clockwise, starting with the red
-              player.
-            </li>
-            <li>
-              <strong>Rolling the Dice:</strong> Click the "Roll Dice" button to roll a six-sided
-              die.
-            </li>
-            <li>
-              <strong>Moving Out of Base:</strong> You need to roll a 6 to move a token out of your
-              base.
-            </li>
-            <li>
-              <strong>Moving Tokens:</strong> Click on a token to move it the number of spaces shown
-              on the dice.
-            </li>
-            <li>
-              <strong>No Valid Moves:</strong> If you cannot make any valid moves, your turn passes
-              automatically.
-            </li>
-          </ul>
-        </div>
-
-        <div class="rules-section">
-          <h3>Movement Rules</h3>
-          <ul>
-            <li>
-              <strong>Path:</strong> Each color follows their own path around the board before
-              entering their home stretch.
-            </li>
-            <li>
-              <strong>Multiple Tokens:</strong> You can choose which token to move if you have
-              multiple options.
-            </li>
-            <li>
-              <strong>Exact Count:</strong> You must have the exact count to reach home. If you roll
-              too high, you cannot move that token.
-            </li>
-          </ul>
-        </div>
-
-        <div class="rules-section">
-          <h3>Capturing Opponent Tokens</h3>
-          <ul>
-            <li>
-              If your token lands on a cell occupied by an opponent's token, their token is sent
-              back to their base.
-            </li>
-            <li>
-              You cannot capture tokens on <strong>safe cells</strong> (marked with stars on the
-              board).
-            </li>
-            <li>Multiple tokens of the same color can occupy the same cell.</li>
-          </ul>
-        </div>
-
-        <div class="rules-section">
-          <h3>Special Rules</h3>
-          <ul>
-            <li><strong>Rolling a 6:</strong> Gives you another turn after moving.</li>
-            <li>
-              <strong>Safe Zones:</strong> Your home stretch is safe from captures by other players.
-            </li>
-          </ul>
-        </div>
-
-        <div class="rules-section">
-          <h3>Winning the Game</h3>
-          <ul>
-            <li>You win by moving all four tokens to your home.</li>
-            <li>
-              The game continues until all but one player has completed the game, establishing a
-              ranking.
-            </li>
-          </ul>
-        </div>
-
-        <div class="rules-section">
-          <h3>Controls</h3>
-          <ul>
-            <li><strong>Roll Dice:</strong> Click the dice button.</li>
-            <li><strong>Move Token:</strong> Click on the token you want to move after rolling.</li>
-          </ul>
-        </div>
-
-        <button id="closeRules" class="close-rules-btn">Close Rules</button>
-      </div>
+      <button id="showRules">Game Rules</button>
     </div>
     <div class="outer">
       <div class="box_row">
@@ -261,6 +161,106 @@
           <div class="circle border_yellow"><div class="token yellow"></div></div>
         </div>
       </div>
+    </div>
+    <div id="gameRules" class="rules-container">
+      <h2>How to Play Ludo</h2>
+
+      <div class="rules-section">
+        <h3>Game Objective</h3>
+        <p>
+          Move all four of your tokens from the base to home by traveling around the board. The
+          first player to get all four tokens home wins!
+        </p>
+      </div>
+
+      <div class="rules-section">
+        <h3>Basic Rules</h3>
+        <ul>
+          <li>
+            <strong>Taking Turns:</strong> Players take turns clockwise, starting with the red
+            player.
+          </li>
+          <li>
+            <strong>Rolling the Dice:</strong> Click the "Roll Dice" button to roll a six-sided die.
+          </li>
+          <li>
+            <strong>Moving Out of Base:</strong> You need to roll a 6 to move a token out of your
+            base.
+          </li>
+          <li>
+            <strong>Moving Tokens:</strong> Click on a token to move it the number of spaces shown
+            on the dice.
+          </li>
+          <li>
+            <strong>No Valid Moves:</strong> If you cannot make any valid moves, your turn passes
+            automatically.
+          </li>
+        </ul>
+      </div>
+
+      <div class="rules-section">
+        <h3>Movement Rules</h3>
+        <ul>
+          <li>
+            <strong>Path:</strong> Each color follows their own path around the board before
+            entering their home stretch.
+          </li>
+          <li>
+            <strong>Multiple Tokens:</strong> You can choose which token to move if you have
+            multiple options.
+          </li>
+          <li>
+            <strong>Exact Count:</strong> You must have the exact count to reach home. If you roll
+            too high, you cannot move that token.
+          </li>
+        </ul>
+      </div>
+
+      <div class="rules-section">
+        <h3>Capturing Opponent Tokens</h3>
+        <ul>
+          <li>
+            If your token lands on a cell occupied by an opponent's token, their token is sent back
+            to their base.
+          </li>
+          <li>
+            You cannot capture tokens on <strong>safe cells</strong> (marked with stars on the
+            board).
+          </li>
+          <li>Multiple tokens of the same color can occupy the same cell.</li>
+        </ul>
+      </div>
+
+      <div class="rules-section">
+        <h3>Special Rules</h3>
+        <ul>
+          <li><strong>Rolling a 6:</strong> Gives you another turn after moving.</li>
+          <li>
+            <strong>Safe Zones:</strong> Your home stretch is safe from captures by other players.
+          </li>
+        </ul>
+      </div>
+
+      <div class="rules-section">
+        <h3>Winning the Game</h3>
+        <ul>
+          <li>You win by moving all four tokens to your home.</li>
+          <li>
+            The game continues until all but one player has completed the game, establishing a
+            ranking.
+          </li>
+        </ul>
+      </div>
+
+      <div class="rules-section">
+        <h3>Controls</h3>
+        <ul>
+          <li><strong>Roll Dice:</strong> Click the dice button.</li>
+          <li><strong>Move Token:</strong> Click on the token you want to move after rolling.</li>
+        </ul>
+      </div>
+
+      <button id="closeRules" class="close-rules-btn">Close Rules</button>
     </div>
   </body>
   <script src="../js/game.js" type="module"></script>
