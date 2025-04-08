@@ -86,6 +86,8 @@ function rollDice() {
   diceResult.textContent = gameState.diceValue;
   gameState.hasRolled = true;
 
+  highlightValidMoves();
+
   // Check if the player can make any moves
   if (!canPlayerMove()) {
     setTimeout(() => {
@@ -297,8 +299,6 @@ function moveToken(color, tokenIndex) {
       // Check if there's a capture
       checkCapture(color, token.position);
     }
-
-    // Update the board
     renderBoard();
     return true;
   }
@@ -366,6 +366,8 @@ function nextTurn() {
   gameState.hasRolled = false;
   gameState.diceValue = null;
   diceResult.textContent = "🎲";
+
+  document.querySelectorAll(".token").forEach((t) => t.classList.remove("movable"));
 
   // Find the next player
   const currentPlayerIndex = COLORS.indexOf(gameState.currentPlayer);
@@ -456,3 +458,44 @@ document.addEventListener("DOMContentLoaded", function () {
     }
   });
 });
+
+function highlightValidMoves() {
+  const color = gameState.currentPlayer;
+  const diceValue = gameState.diceValue;
+
+  // Clear previous highlights
+  document.querySelectorAll(".token").forEach((t) => t.classList.remove("movable"));
+
+  // No dice roll yet, no valid moves to highlight
+  if (!gameState.hasRolled) return;
+
+  // Check base tokens if rolled a 6
+  if (diceValue === 6) {
+    gameState.tokens[color].forEach((token, index) => {
+      if (token.inBase) {
+        const baseToken = document.querySelector(
+          `.box .circle.border_${color} .token.${color}[data-index="${index}"]:not(.hidden)`
+        );
+        if (baseToken) baseToken.classList.add("movable");
+      }
+    });
+  }
+
+  // Check board tokens
+  gameState.tokens[color].forEach((token, index) => {
+    if (!token.inBase && !token.completed) {
+      // Check if the move would be valid
+      const currentPathIndex = PATHS[color].indexOf(String(token.position));
+      const newPathIndex = currentPathIndex + diceValue;
+
+      // Only highlight if the move is valid (within path length)
+      if (currentPathIndex !== -1 && newPathIndex < PATHS[color].length) {
+        const cell = document.getElementById(token.position);
+        if (cell) {
+          const tokenEls = cell.querySelectorAll(`.token.${color}`);
+          tokenEls.forEach((tokenEl) => tokenEl.classList.add("movable"));
+        }
+      }
+    }
+  });
+}

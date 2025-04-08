@@ -44,7 +44,7 @@ Open index.html in your browser to start playing!
 Game.js includes:
 - Game Constants and State:
   - Player colors, paths, and special cells
-  - Token positions and state tracking- 
+  - Token positions and state tracking 
   - Current player turn and dice values
 
 - Game Mechanics:
