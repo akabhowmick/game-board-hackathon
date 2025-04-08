@@ -68,6 +68,3 @@ Game.js includes:
   - Dice roll display
   - Board updates after each move
   - Win condition checking
-
-
-Include a link to a <5m video where you describe 1 technical accomplishment and 1 technical challenge you faced during this process
